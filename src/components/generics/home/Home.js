@@ -4,44 +4,8 @@ import PropTypes from 'prop-types';
 import NavBar from '../navbar/NavBar';
 import './styles.css';
 import TransactionCard from '../../transactionCard/TransactionCard';
-
-//Por ahora como muestra vamos a usar un localStorage, después nos quemamos la cabeza con la API.
-const PENDING_TRANSACTIONS = [
-    {
-        transactionId: 1000,
-        offerer: 'Aparicio Baptista',
-        amount: 10,
-        erate: 37.00,
-        from: 'UYU',
-        to: 'USD',
-    },
-    {
-        transactionId: 1001,
-        offerer: 'Aparicio Baptista',
-        amount: 15,
-        erate: 37.08,
-        from: 'UYU',
-        to: 'USD',
-    },
-    {
-        transactionId: 1002,
-        offerer: 'Rodrigo Castro',
-        amount: 10,
-        erate: 11,
-        from: 'UYU',
-        to: 'BRL',
-    },
-    {
-        transactionId: 1003,
-        offerer: 'Francisco Bongiovanni',
-        amount: 10000,
-        erate: 0.100,
-        from: 'CHL',
-        to: 'UYU',
-    }
-];
-
-localStorage.setItem('pending_transactions', JSON.stringify(PENDING_TRANSACTIONS));
+import Axios from 'axios';
+import { url } from './../../../api/Methods';
 
 class Home extends Component {
     constructor(props) {
@@ -52,10 +16,14 @@ class Home extends Component {
         };
     }
 
-
     componentDidMount() {
-        let pending_transactions = JSON.parse(localStorage.getItem('pending_transactions'));
-        this.setState({ pending_transactions });
+        Axios.get(url)
+            .then((response) => {
+                this.setState({ pending_transactions: response.data })
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     render() {

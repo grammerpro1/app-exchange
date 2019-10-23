@@ -25,13 +25,13 @@ const NavBar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink>Inicio</NavLink>
+              <NavLink href="/home">Inicio</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>Buscar...</NavLink>
+              <NavLink href="/buy">Comprar</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>Ofertar...</NavLink>
+              <NavLink href="/offer">Ofertar</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>

@@ -1,0 +1,53 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "transactions": [
+    {
+        "transactionId": 1000,
+        "offerer": "Aparicio Baptista",
+        "amount": 10,
+        "erate": 37.00,
+        "from": "UYU",
+        "to": "USD"
+    },
+    {
+        "transactionId": 1001,
+        "offerer": "Aparicio Baptista",
+        "amount": 15,
+        "erate": 37.08,
+        "from": "UYU",
+        "to": "USD"
+    },
+    {
+        "transactionId": 1002,
+        "offerer": "Rodrigo Castro",
+        "amount": 10,
+        "erate": 11,
+        "from": "UYU",
+        "to": "BRL"
+    },
+    {
+        "transactionId": 1003,
+        "offerer": "Francisco Bongiovanni",
+        "amount": 10000,
+        "erate": 0.100,
+        "from": "CHL",
+        "to": "UYU"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

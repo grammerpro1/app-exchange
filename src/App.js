@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Login from './components/generics/login/Login';
 import Home from './components/generics/home/Home';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Offer from './components/offer/Offer';
 
 class App extends Component {
     constructor(props) {
@@ -15,9 +16,6 @@ class App extends Component {
       }
     }
 
-    renderHome = () => <h1>Home</h1>;
-    renderTest = () => <h1>Test</h1>;
-
     render() {
       //Desconocería si esta es la forma más correcta de hacerlo. Tendría que ir viendo y modificarlo; por mientras que quede este chanchullo.
       //La verdad es que está todo mal hecho, pero voy a ver como arreglarlo, don't worry, ticket for me. 
@@ -27,6 +25,9 @@ class App extends Component {
             <div>
             <Route exact path="/" component={Login}/>
             <Route exact path="/home" component={Home}/>
+            <Route exact path="/buy" component={Home}/>
+            <Route exact path="/search" component={Home}/>
+            <Route exact path="/offer" component={Offer}/>
             </div>
           </Router>
         );

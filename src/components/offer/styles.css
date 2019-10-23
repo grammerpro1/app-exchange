@@ -1,0 +1,13 @@
+.offer-layout {
+    border: 1px solid #D3D3D3; 
+    margin: 10px;
+    padding: 50px;
+    border-radius: 10px;
+    height: 600px;
+    overflow: auto;
+    scroll-margin: 50px 50px 50px 50px;
+}
+
+.buttonCalc {
+    margin-top: 25px;
+}
