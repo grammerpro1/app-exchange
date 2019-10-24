@@ -15,36 +15,28 @@
   ],
   "transactions": [
     {
-        "transactionId": 1000,
-        "offerer": "Aparicio Baptista",
-        "amount": 10,
-        "erate": 37.00,
-        "from": "UYU",
-        "to": "USD"
+      "state": 1
     },
     {
-        "transactionId": 1001,
-        "offerer": "Aparicio Baptista",
-        "amount": 15,
-        "erate": 37.08,
-        "from": "UYU",
-        "to": "USD"
+      "state": 1
     },
     {
-        "transactionId": 1002,
-        "offerer": "Rodrigo Castro",
-        "amount": 10,
-        "erate": 11,
-        "from": "UYU",
-        "to": "BRL"
+      "transactionId": 1002,
+      "offerer": "Rodrigo Castro",
+      "amount": 10,
+      "erate": 11,
+      "from": "UYU",
+      "to": "BRL",
+      "state": 0
     },
     {
-        "transactionId": 1003,
-        "offerer": "Francisco Bongiovanni",
-        "amount": 10000,
-        "erate": 0.100,
-        "from": "CHL",
-        "to": "UYU"
+      "transactionId": 1003,
+      "offerer": "Francisco Bongiovanni",
+      "amount": 10000,
+      "erate": 0.1,
+      "from": "CHL",
+      "to": "UYU",
+      "state": 0
     }
   ],
   "profile": {

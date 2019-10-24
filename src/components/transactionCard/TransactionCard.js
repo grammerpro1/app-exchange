@@ -5,6 +5,7 @@ import {
     CardTitle, CardSubtitle, Button, Container
 } from 'reactstrap';
 import './styles.css';
+import { withRouter, Link } from 'react-router-dom';
 
 
 class TransactionCard extends Component {
@@ -19,7 +20,10 @@ class TransactionCard extends Component {
                             <CardTitle>{transactionId}</CardTitle>
                             <CardSubtitle>{offerer}</CardSubtitle>
                             <CardText>{`Ofreció $${amount} ${to} a ${erate} por $xx.xx ${from}`}</CardText>
-                            <Button block>Ver</Button>
+                            {/* Redirige a coso */}
+                            <Link to={`transaction/${transactionId}/confirm`}>
+                                <Button block>Comprar</Button>
+                            </Link>
                         </CardBody>
                     </Card>
                 </Container>
@@ -37,4 +41,4 @@ TransactionCard.propTypes = {
     to: PropTypes.string.isRequired,
 };
 
-export default TransactionCard;
+export default withRouter(TransactionCard);

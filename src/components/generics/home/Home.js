@@ -42,6 +42,7 @@ class Home extends Component {
                                     erate={transaction.erate}
                                     from={transaction.from}
                                     to={transaction.to}
+                                    state={transaction.state}
                                 />;
                             })
                         }
