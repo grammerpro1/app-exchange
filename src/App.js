@@ -26,11 +26,12 @@ class App extends Component {
             <div>
             <Route exact path="/" component={Login}/>
             <Route exact path="/home" component={Home}/>
+            <Route exact path="/home/new" component={Home}/>
             <Route exact path="/buy" component={Home}/>
             <Route exact path="/search" component={Home}/>
             <Route exact path="/offer" component={Offer}/>
         {/* <Route exact path="/transaction/:transactionId/confirm" render={(props) => console.log(props)>}/> */}
-        <Route exact path="/transaction/:transactionId/confirm" render={(props) => <ConfirmTransaction {...props} transactionId={props.match.params.transactionId} />}/>
+        <Route exact path="/transaction/:transactionId/confirm" render={(props) => <ConfirmTransaction {...props} />}/>
             </div>
           </Router>
         );

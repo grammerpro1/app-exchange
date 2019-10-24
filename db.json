@@ -15,19 +15,31 @@
   ],
   "transactions": [
     {
+      "transactionId": 1000,
+      "offerer": "Aparicio Baptista",
+      "amount": 10000,
+      "erate": 0.1,
+      "from": "CHL",
+      "to": "UYU",
       "state": 1
     },
     {
+      "transactionId": 1001,
+      "offerer": "Gonzalo Curbelo",
+      "amount": 10000,
+      "erate": 37,
+      "from": "UYU",
+      "to": "USD",
       "state": 1
     },
     {
       "transactionId": 1002,
       "offerer": "Rodrigo Castro",
-      "amount": 10,
-      "erate": 11,
+      "amount": 1000,
+      "erate": 36,
       "from": "UYU",
-      "to": "BRL",
-      "state": 0
+      "to": "USD",
+      "state": 1
     },
     {
       "transactionId": 1003,

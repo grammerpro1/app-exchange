@@ -26,6 +26,10 @@ class Home extends Component {
             });
     }
 
+    componentDidUpdate() {
+        console.log('pepino');
+    }
+
     render() {
         return (
             <div>

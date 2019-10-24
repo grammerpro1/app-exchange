@@ -4,28 +4,27 @@ import NavBar from '../generics/navbar/NavBar';
 import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import './styles.css';
 import Axios from 'axios';
+import swal from 'sweetalert';
+import { withRouter } from 'react-router-dom';
+import { url as apiUrl } from '../../api/Methods';
 
 class ConfirmTransaction extends Component {
     onClick(event) {
         event.preventDefault();
 
-        let url = "http://localhost:3001/transactions/" + this.props.transactionId;
-        //Lo mas facil seria mandarle los datos de la transaction, igual esto lo tendria que manejar
-        //la api internamente, enviándole sólo un indicador que cambie el estado de la transaction
+        let { transactionId, offerer, amount, erate, from, to, state } = this.props.location.state;
+        let transaction = { transactionId, offerer, amount, erate, from, to, state : 1};
+        let url = apiUrl + '/' + transactionId;
 
-        Axios.put(url, {
-            tansactionID: this.props.tansactionID,
-            offerer: this.props.offerer,
-            amount: this.props.amount,
-            erate: this.props.erate,
-            from: this.props.from,
-            to: this.props.to,
-            state: 1,
-        })
+        Axios.put(url, transaction)
         .then(response => {
             console.log(response);
             console.log(response.data);
         });
+
+        swal("Exito", "La transacción ha sido completada", "success");
+
+        this.props.history.push('/home/new');
     }
 
     render() {
@@ -37,7 +36,7 @@ class ConfirmTransaction extends Component {
                         <Row>
                             <Col>
                             <Jumbotron>
-                                <h1>Transacción {this.props.transactionId}</h1>
+                                <h1>Transacción {this.props.location.state.transactionId}</h1>
                                 <hr/>
                                 <p>¿Está seguro que desea confirmar la transacción?</p>
                                 <Button color="primary" onClick={this.onClick.bind(this)}>Confirmar</Button>
@@ -55,4 +54,4 @@ ConfirmTransaction.propTypes = {
 
 };
 
-export default ConfirmTransaction;
+export default withRouter(ConfirmTransaction);
