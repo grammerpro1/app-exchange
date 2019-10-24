@@ -9,7 +9,7 @@ class ConfirmTransaction extends Component {
             </div>
         );
     }
-}
+} 
 
 ConfirmTransaction.propTypes = {
 
