@@ -2,3 +2,7 @@
     width: 50px;
     padding-bottom: 10px;
 }
+
+.disabledCursor {
+  cursor: default;
+}

@@ -10,7 +10,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 class TransactionCard extends Component {
     render() {
-        const { transactionId, offerer, amount, erate, from, to } = this.props;
+        const { transactionId, offerer, amount, erate, from, to, state } = this.props;
         return (
             <div>
                 <Container className="card-container">
@@ -19,11 +19,17 @@ class TransactionCard extends Component {
                         <CardBody>
                             <CardTitle>{transactionId}</CardTitle>
                             <CardSubtitle>{offerer}</CardSubtitle>
-                            <CardText>{`Ofreció $${amount} ${to} a ${erate} por $xx.xx ${from}`}</CardText>
+                            <CardText>{`Ofreció ${amount} ${to} a ${erate} por ${amount * erate} ${from}`}</CardText>
                             {/* Redirige a coso */}
-                            <Link to={`transaction/${transactionId}/confirm`}>
-                                <Button block>Comprar</Button>
-                            </Link>
+                            {
+                                (state === 1)
+                                    ? <Link className="disabledCursor" onClick={(event) => event.preventDefault()}>
+                                        <Button block>Comprar</Button>
+                                    </Link>
+                                    : <Link to={`transaction/${transactionId}/confirm`}>
+                                        <Button block>Comprar</Button>
+                                    </Link>
+                            }
                         </CardBody>
                     </Card>
                 </Container>

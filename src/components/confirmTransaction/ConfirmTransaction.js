@@ -14,7 +14,13 @@ class ConfirmTransaction extends Component {
         //la api internamente, enviándole sólo un indicador que cambie el estado de la transaction
 
         Axios.put(url, {
-            state: 1
+            tansactionID: this.props.tansactionID,
+            offerer: this.props.offerer,
+            amount: this.props.amount,
+            erate: this.props.erate,
+            from: this.props.from,
+            to: this.props.to,
+            state: 1,
         })
         .then(response => {
             console.log(response);
