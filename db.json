@@ -51,6 +51,38 @@
       "state": 0
     }
   ],
+  "currencies": [
+    {
+      "id:": "1001",
+      "description": "Dolar americano",
+      "name": "USD",
+      "value": 37
+    },
+    {
+      "id": "990",
+      "description": "Peso chileno",
+      "name": "CLF",
+      "value": 120
+    },
+    {
+      "id": "032",
+      "description": "Peso argentino",
+      "name": "ARS",
+      "value": 0.54
+    },
+    {
+      "id": "986",
+      "description": "Real brasilero",
+      "name": "BRL",
+      "value": 11
+    },
+    {
+      "id": "978",
+      "description": "Euro",
+      "name": "EUR",
+      "value": 40
+    }
+  ],
   "profile": {
     "name": "typicode"
   }
