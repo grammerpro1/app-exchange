@@ -49,6 +49,16 @@
       "from": "CHL",
       "to": "UYU",
       "state": 0
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 30.12,
+      "amount": 15.5,
+      "state": 0,
+      "id": 1010,
+      "offerer": "phaller",
+      "transactionId": 1004
     }
   ],
   "currencies": [
