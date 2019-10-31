@@ -28,7 +28,8 @@ class Signup extends Component {
         } else {
             console.log(`Intentando registrar a usuario ${this.userNameInput.value}`);
             //TODO: Registrar al usuario, o mostrar error si este ya existe
-            // this.props.history.push('/home', { userId: userid, username: this.userNameInput.value });
+            const newUserId = 12345678;
+            this.props.history.push('/home', { userId: newUserId, username: this.userNameInput.value });
         }
     }
 
