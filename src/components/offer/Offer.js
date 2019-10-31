@@ -1,32 +1,45 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Container, Row, Col, Label, Input, Jumbotron, Button } from 'reactstrap';
 import NavBar from '../generics/navbar/NavBar';
 import './styles.css';
+import swal from 'sweetalert';
 
 class Offer extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            transaction_data : {},
-        };
+        this.state = {};
     }
     
-    onClick(event) {
+    handleClickCalculate(event) {
         event.preventDefault();
-        console.log('pija chota');      
+        console.log(this.state);
+        if(
+            (this.amountInput.value === '' || this.amountInput.value === null) ||
+            (this.fromCurrencyInput.value === '' || this.fromCurrencyInput.value === null) ||
+            (this.toCurrencyInput.value === '' || this.toCurrencyInput.value === null) ||
+            (this.erateInput.value === '' || this.erateInput.value === null)
+        ) {
+            swal("Error", "Todos los campos del formulario deben de estar completos", "error"); 
+        } else {
+           console.log("amountInput = " + this.amountInput.value);
+           console.log("fromCurrencyInput = " + this.fromCurrencyInput.value);
+           console.log("toCurrencyInput = " + this.toCurrencyInput.value);
+           console.log("erateInput = " + this.erateInput.value);
+
+            this.setState({
+                    from: this.fromCurrencyInput.value, 
+                    to: this.toCurrencyInput.value,
+                    erate: this.erateInput.value,
+                    amount: this.amountInput.value
+              });
+        }
     }
 
     render() {
-        let { from, to, amount, erate } = this.state.transaction_data;
+        let { from, to, amount, erate } = this.state;
         let hasData = false;
         let conversion = amount * erate; 
-
-        amount = 10;
-        erate = 50;
-        from = 'UYU';
-        to = 'CHL';
 
         if(from != null && to != null && amount != null && erate != null) {
             hasData = true;
@@ -45,18 +58,25 @@ class Offer extends Component {
                             </Col>
                             <Col>
                                 <Label>Moneda Origen</Label>
-                                <Input type="select" innerRef={fromCurrencyInput => this.fromCurrencyInput = fromCurrencyInput}/>
+                                <Input type="select" innerRef={fromCurrencyInput => this.fromCurrencyInput = fromCurrencyInput}>
+                                    <option>UYU</option>
+                                </Input>
                             </Col>
                             <Col>
                                 <Label>Moneda Cambio</Label>
-                                <Input type="select"  innerRef={toCurrencyInput => this.toCurrencyInput = toCurrencyInput}/>
+                                <Input type="select"  innerRef={toCurrencyInput => this.toCurrencyInput = toCurrencyInput}>
+                                    <option>USD</option>
+                                    <option>CHL</option>
+                                    <option>VLF</option>
+                                    <option>EUR</option>
+                                </Input>
                             </Col>
                             <Col>
                                 <Label>Tasa de cambio</Label>
                                 <Input type="number" innerRef={erateInput => this.erateInput = erateInput}/>
                             </Col>
                             <Col>
-                                <Button className="buttonCalc" color="primary" size="lg" onClick={this.onClick.bind(this)}>Calcular</Button>
+                                <Button className="buttonCalc" color="primary" size="lg" onClick={this.handleClickCalculate.bind(this)}>Calcular</Button>
                             </Col>
                         </Row>
                         <Row>
@@ -68,6 +88,7 @@ class Offer extends Component {
                                         <h1>${amount} {from} -> ${conversion} {to}</h1>
                                         <hr/>
                                         <p>Se ha convertido el monto en base a una tasa de cambio de {erate}</p>
+                                        <p>¿Desea publicar la oferta?</p>
                                     </Jumbotron>
                                 }
                             </Col>
@@ -78,9 +99,5 @@ class Offer extends Component {
         );
     }
 }
-
-Offer.propTypes = {
-
-};
 
 export default Offer;
