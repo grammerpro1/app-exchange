@@ -6,7 +6,7 @@ import Signup from './components/generics/signup/Signup';
 import Home from './components/generics/home/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Offer from './components/offer/Offer';
-import ConfirmTransaction from './components/ConfirmTransaction/ConfirmTransaction';
+import ConfirmTransaction from './components/confirmTransaction/ConfirmTransaction';
 
 class App extends Component {
     constructor(props) {
