@@ -20,7 +20,7 @@ class Login extends Component {
     super(props);
 
     this.onInputKeyPress = this.onInputKeyPress.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.onLoginClick = this.onLoginClick.bind(this);
   }
 
   onInputKeyPress(event) {
