@@ -4,7 +4,6 @@ import NavBar from '../generics/navbar/NavBar';
 import './styles.css';
 import swal from 'sweetalert';
 import doApiPost from './../../api/Methods';
-import TransactionCard from '../transactionCard/TransactionCard';
 
 class Offer extends Component {
     constructor(props) {
@@ -15,20 +14,24 @@ class Offer extends Component {
 
     handleClickCalculate(event) {
         event.preventDefault();
-        if (
-            (this.amountInput.value === '' || this.amountInput.value === null) ||
-            (this.fromCurrencyInput.value === '' || this.fromCurrencyInput.value === null) ||
-            (this.toCurrencyInput.value === '' || this.toCurrencyInput.value === null) ||
-            (this.erateInput.value === '' || this.erateInput.value === null)
-        ) {
-            swal("Error", "Todos los campos del formulario deben de estar completos", "error");
+        if (this.fromCurrencyInput.value !== "UYU" && this.toCurrencyInput.value !== "UYU") {
+            swal("Error", "Por lo menos uno de los campos de moneda debe ser UYU", "error");
         } else {
-            this.setState({
-                from: this.fromCurrencyInput.value,
-                to: this.toCurrencyInput.value,
-                erate: parseFloat(this.erateInput.value),
-                amount: parseFloat(this.amountInput.value)
-            });
+            if (
+                (this.amountInput.value === '' || this.amountInput.value === null) ||
+                (this.fromCurrencyInput.value === '' || this.fromCurrencyInput.value === null) ||
+                (this.toCurrencyInput.value === '' || this.toCurrencyInput.value === null) ||
+                (this.erateInput.value === '' || this.erateInput.value === null)
+            ) {
+                swal("Error", "Todos los campos del formulario deben de estar completos", "error");
+            } else {
+                this.setState({
+                    from: this.fromCurrencyInput.value,
+                    to: this.toCurrencyInput.value,
+                    erate: parseFloat(this.erateInput.value),
+                    amount: parseFloat(this.amountInput.value)
+                });
+            }
         }
     }
 
@@ -41,17 +44,17 @@ class Offer extends Component {
             buttons: true,
             dangerMode: true,
         }).then((willDelete) => {
-            if (willDelete) {
-                    doApiPost({...this.state, state: 0, id: 1010, offerer: "phaller"});
-                    swal("Poof! Your imaginary file has been deleted!", {
+                if (willDelete) {
+                    doApiPost({...this.state, state: 0, offerer: sessionStorage.getItem('username'),  calificationToBuyer : 0, calificationToOfferer: 0});
+                    // doApiPost(chumingo);
+                    swal("La operación se ha completado con exito!", {
                         icon: "success",
                     });
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("La operación se ha cancelado");
                 }
             });
     }
-
 
     render() {
         let { from, to, amount, erate } = this.state;
@@ -76,16 +79,18 @@ class Offer extends Component {
                             <Col>
                                 <Label>Moneda Origen</Label>
                                 <Input type="select" innerRef={fromCurrencyInput => this.fromCurrencyInput = fromCurrencyInput}>
-                                    <option>UYU</option>
+                                    <option value="UYU">UYU</option>
+                                    <option value="USD">USD</option>
                                 </Input>
                             </Col>
                             <Col>
                                 <Label>Moneda Cambio</Label>
                                 <Input type="select" innerRef={toCurrencyInput => this.toCurrencyInput = toCurrencyInput}>
-                                    <option>USD</option>
-                                    <option>CHL</option>
-                                    <option>VLF</option>
-                                    <option>EUR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="CHL">CHL</option>
+                                    <option value="VLF">VLF</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="UYU">UYU</option>
                                 </Input>
                             </Col>
                             <Col>

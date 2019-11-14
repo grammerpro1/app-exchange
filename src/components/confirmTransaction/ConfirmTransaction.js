@@ -12,9 +12,12 @@ class ConfirmTransaction extends Component {
     onClick(event) {
         event.preventDefault();
 
-        let { transactionId, offerer, amount, erate, from, to, state } = this.props.location.state;
-        let transaction = { transactionId, offerer, amount, erate, from, to, state : 1};
-        let url = apiUrl + '/' + transactionId;
+        let { id, offerer, amount, erate, from, to, state } = this.props.location.state;
+        let transaction = { id, offerer, amount, erate, from, to, state : 1, buyer: sessionStorage.getItem("username"), calificationToBuyer : 0, calificationToOfferer: 0};
+        let url = apiUrl + '/' + id;
+
+        console.log("va la transaction");
+        console.log(transaction);
 
         Axios.put(url, transaction)
         .then(response => {
@@ -36,7 +39,7 @@ class ConfirmTransaction extends Component {
                         <Row>
                             <Col>
                             <Jumbotron>
-                                <h1>Transacción {this.props.location.state.transactionId}</h1>
+                                <h1>Transacción {this.props.location.state.id}</h1>
                                 <hr/>
                                 <p>¿Está seguro que desea confirmar la transacción?</p>
                                 <Button color="primary" onClick={this.onClick.bind(this)}>Confirmar</Button>
