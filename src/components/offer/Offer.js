@@ -3,7 +3,7 @@ import { Container, Row, Col, Label, Input, Jumbotron, Button } from 'reactstrap
 import NavBar from '../generics/navbar/NavBar';
 import './styles.css';
 import swal from 'sweetalert';
-import { apiUrl, doApiPost } from './../../api/Methods';
+import { baseUrl, doApiPost } from './../../api/Methods';
 import Axios from 'axios';
 
 class Offer extends Component {
@@ -62,7 +62,7 @@ class Offer extends Component {
     }
 
     doPublishPost(publication) {
-        let apiUrlPost = apiUrl + `Publications?currency_id=${publication.publication_main_currency}&selling=${publication.publication_selling}&price=${0}&amount=${publication.publication_amount}&user_id=${publication.publication_user_id}`;
+        let apiUrlPost = baseUrl + `Publications?currency_id=${publication.publication_main_currency}&selling=${publication.publication_selling}&price=${0}&amount=${publication.publication_amount}&user_id=${publication.publication_user_id}`;
 
         Axios.post(apiUrlPost, publication)
         .then(response => {
@@ -72,7 +72,7 @@ class Offer extends Component {
     }
 
     componentDidMount() {
-        Axios.get(apiUrl + 'Currencies').then((response) => {
+        Axios.get(baseUrl + 'Currencies').then((response) => {
             console.log(response.data);
                     this.setState({ currencies : response.data });
                 }).catch((error) => {

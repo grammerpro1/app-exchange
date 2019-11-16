@@ -5,7 +5,7 @@ import NavBar from '../navbar/NavBar';
 import './styles.css';
 import TransactionCard from '../../transactionCard/TransactionCard';
 import Axios from 'axios';
-import { url } from './../../../api/Methods';
+import { baseUrl as url } from './../../../api/Methods';
 
 class Home extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        Axios.get(url)
+        Axios.get(url + "Publications")
             .then((response) => {
                 this.setState({ pending_transactions: response.data })
             })
@@ -32,7 +32,7 @@ class Home extends Component {
 
     render() {
         let other_transactions = this.state.pending_transactions;
-        let non_user_transactions = other_transactions.filter(other_transactions => other_transactions.offerer !== sessionStorage.getItem('username'));
+        let non_user_transactions = other_transactions.filter(other_transactions => other_transactions.offerer !== 2);
 
         return (
             <div>
