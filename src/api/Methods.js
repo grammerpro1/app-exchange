@@ -1,16 +1,9 @@
-import Axios from 'axios';
+import Axios from "axios";
 
-export const url = 'http://localhost:3001/transactions';
-export const apiUrl = 'http://topicos.azurewebsites.net/api/';
+const baseUrl = "https://topicos.azurewebsites.net/api/";
 
-export const doApiPost = (transaction) => {
-    console.log("transaction");
-    console.log(transaction);
-    Axios.post(url, transaction)
-    .then(response => {
-        console.log(response);
-        console.log(response.data);
-    });
+function doApiGet(suburl, params) {
+    return Axios.get(baseUrl + suburl, params);
 }
 
-export default doApiPost;
+export default { doApiGet };
