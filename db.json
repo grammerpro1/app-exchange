@@ -15,7 +15,7 @@
   ],
   "transactions": [
     {
-      "transactionId": 1000,
+      "id": 1000,
       "offerer": "Aparicio Baptista",
       "amount": 10000,
       "erate": 0.1,
@@ -24,7 +24,7 @@
       "state": 1
     },
     {
-      "transactionId": 1001,
+      "id": 1001,
       "offerer": "Gonzalo Curbelo",
       "amount": 10000,
       "erate": 37,
@@ -33,7 +33,7 @@
       "state": 1
     },
     {
-      "transactionId": 1002,
+      "id": 1002,
       "offerer": "Rodrigo Castro",
       "amount": 1000,
       "erate": 36,
@@ -42,7 +42,7 @@
       "state": 1
     },
     {
-      "transactionId": 1003,
+      "id": 1003,
       "offerer": "Francisco Bongiovanni",
       "amount": 10000,
       "erate": 0.1,
@@ -51,14 +51,69 @@
       "state": 0
     },
     {
-      "from": "UYU",
-      "to": "USD",
-      "erate": 30.12,
-      "amount": 15.5,
-      "state": 0,
       "id": 1010,
       "offerer": "phaller",
-      "transactionId": 1004
+      "amount": 15.5,
+      "erate": 30.12,
+      "from": "UYU",
+      "to": "USD",
+      "state": 1
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 50.33,
+      "amount": 40.34,
+      "state": 0,
+      "id": 1010,
+      "offerer": "phaller"
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 70,
+      "amount": 100,
+      "state": 0,
+      "offerer": "phaller",
+      "id": 1011
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 1.33,
+      "amount": 10,
+      "state": 0,
+      "offerer": "phaller",
+      "id": 1012
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 100,
+      "amount": 10,
+      "state": 0,
+      "offerer": "phaller",
+      "id": 1013
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 1222,
+      "amount": 122,
+      "state": 0,
+      "offerer": "phaller",
+      "id": 1014
+    },
+    {
+      "from": "UYU",
+      "to": "USD",
+      "erate": 0.366,
+      "amount": 30,
+      "state": 0,
+      "offerer": "phaller",
+      "calificationToBuyer": 0,
+      "calificationToOfferer": 0,
+      "id": 1015
     }
   ],
   "currencies": [
@@ -95,5 +150,9 @@
   ],
   "profile": {
     "name": "typicode"
+  },
+  "users": {
+    "id": "phaller",
+    "pwd": 1234
   }
 }
