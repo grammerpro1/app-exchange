@@ -33,11 +33,9 @@ class Login extends Component {
                     }
                 })
                 .then(response => {
-                    const userId = response.data.user_id;
-                    this.props.history.push("/home", {
-                      userId: userId,
-                      username: this.userNameInput.value
-                    });
+                    localStorage.setItem("userId", response.data.user_id);
+                    localStorage.setItem("username", this.userNameInput.value);
+                    this.props.history.push("/home", {});
                 })
                 .catch(error => {
                     console.log(error);
