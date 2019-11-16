@@ -6,7 +6,7 @@ import './styles.css';
 import Axios from 'axios';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
-import { url as apiUrl } from '../../api/Methods';
+import { baseUrl as apiUrl } from '../../api/Methods';
 
 class ConfirmTransaction extends Component {
     onClick(event) {
