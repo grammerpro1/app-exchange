@@ -82,6 +82,9 @@ class Login extends Component {
                                 Iniciar sesión
                             </Button>
                         </p>
+                        <p className="centered-link">
+                            ¿No tienes cuenta? <a href="/signup">Regístrate en Plata Exchange</a>.
+                        </p>
                     </div>
                 </Container>
             </div>

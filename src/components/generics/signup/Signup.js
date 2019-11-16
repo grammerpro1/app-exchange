@@ -135,6 +135,9 @@ class Signup extends Component {
                                 Registrarse
                             </Button>
                         </p>
+                        <p className="centered-link">
+                            ¿Tienes cuenta? <a href="/login">Ingresa a Plata Exchange</a>.
+                        </p>
                     </div>
                 </Container>
             </div>
