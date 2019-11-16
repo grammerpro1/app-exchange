@@ -61,13 +61,19 @@ class Login extends Component {
                         <Form>
                             <FormGroup>
                                 <Label for="userName">Nombre de usuario</Label>
-                                <Input id="userName" placeholder="Ingrese aquí su nombre de usuario" innerRef={input => (this.userNameInput = input)} />
+                                <Input
+                                    id="userName"
+                                    placeholder="Ingrese aquí su nombre de usuario"
+                                    innerRef={input => (this.userNameInput = input)}
+                                    onKeyPress={this.onInputKeyPress}
+                                />
                                 <Label for="userName">Contraseña</Label>
                                 <Input
                                     id="password"
                                     type="password"
                                     placeholder="Ingrese aquí su contraseña"
                                     innerRef={input => (this.passwordInput = input)}
+                                    onKeyPress={this.onInputKeyPress}
                                 />
                             </FormGroup>
                         </Form>
