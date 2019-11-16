@@ -15,7 +15,7 @@ class Login extends Component {
 
     onInputKeyPress(event) {
         if (event.key === "Enter") {
-            this.onRegisterClick(event);
+            this.onLoginClick(event);
         }
     }
 
