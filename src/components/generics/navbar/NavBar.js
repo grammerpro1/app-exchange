@@ -19,7 +19,7 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar style={{ backgroundColor: "wheat"}} expand="md">
         <NavbarBrand href="/">Plata Exchange</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
