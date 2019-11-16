@@ -32,7 +32,7 @@ class Home extends Component {
 
     render() {
         let other_transactions = this.state.pending_transactions;
-        let non_user_transactions = other_transactions.filter(other_transactions => other_transactions.offerer !== sessionStorage.getItem('username'));
+        let non_user_transactions = other_transactions.filter(other_transactions => other_transactions.offerer !== 2);
 
         return (
             <div>
