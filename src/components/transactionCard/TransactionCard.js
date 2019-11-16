@@ -8,20 +8,20 @@ import { withRouter, Link } from 'react-router-dom';
 class TransactionCard extends Component {
     handleBuy(e) {
         e.preventDefault();
-            let { transactionId, offerer, amount, erate, from, to, state } = this.props;
-            let transaction = { transactionId, offerer, amount, erate, from, to, state };
+            let { id, offerer, amount, erate, from, to, state } = this.props;
+            let transaction = { id, offerer, amount, erate, from, to, state };
     
-            this.props.history.push(`/transaction/${transactionId}/confirm`, transaction);
+            this.props.history.push(`/transaction/${id}/confirm`, transaction);
     }
 
     render() {
-        const { transactionId, offerer, amount, erate, from, to, state } = this.props;
+        const { id, offerer, amount, erate, from, to, state } = this.props;
         return (
             <div>
                 <Container className="card-container">
                     <Card width>
                         <CardBody>
-                            <CardTitle><h1>{transactionId}</h1></CardTitle>
+                            <CardTitle><h1>{id}</h1></CardTitle>
                             <CardSubtitle><h3>{offerer}</h3></CardSubtitle>
                             <CardText>{`Ofreció ${amount} ${to} a ${erate} por ${amount * erate} ${from}`}</CardText>
                             {state === 0 ? (<Button block onClick={this.handleBuy.bind(this)}>Comprar</Button>) : 
@@ -35,7 +35,7 @@ class TransactionCard extends Component {
 }
 
 TransactionCard.propTypes = {
-    transactionId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     offerer: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
     erate: PropTypes.number.isRequired,
