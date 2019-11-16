@@ -19,8 +19,8 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">App Exchange</NavbarBrand>
+      <Navbar style={{ backgroundColor: "wheat"}} expand="md">
+        <NavbarBrand href="/">Plata Exchange</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

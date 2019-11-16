@@ -15,7 +15,7 @@ class Login extends Component {
 
     onInputKeyPress(event) {
         if (event.key === "Enter") {
-            this.onRegisterClick(event);
+            this.onLoginClick(event);
         }
     }
 
@@ -81,6 +81,9 @@ class Login extends Component {
                             <Button size="lg" block onClick={this.onLoginClick}>
                                 Iniciar sesión
                             </Button>
+                        </p>
+                        <p className="centered-link">
+                            ¿No tienes cuenta? <a href="/signup">Regístrate en Plata Exchange</a>.
                         </p>
                     </div>
                 </Container>
