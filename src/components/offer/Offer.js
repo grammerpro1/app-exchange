@@ -3,13 +3,13 @@ import { Container, Row, Col, Label, Input, Jumbotron, Button } from 'reactstrap
 import NavBar from '../generics/navbar/NavBar';
 import './styles.css';
 import swal from 'sweetalert';
-import { apiUrl, doApiPost } from './../../api/Methods';
+import * as Api from './../../api/Methods';
 import Axios from 'axios';
 
 class Offer extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             currencies: []
         };
@@ -21,25 +21,25 @@ class Offer extends Component {
         let amount = this.amountInput.value;
         let currencyIso = this.currencyInput.value.split("<cur>")[0];
         let currency = this.currencyInput.value.split("<cur>")[1];
-        let publicationType = this.publicationTypeInput.value; 
+        let publicationType = this.publicationTypeInput.value;
         let publication_selling = true;
 
         let infoText = "";
-        let infoTitle = "";        
+        let infoTitle = "";
 
         if(publicationType === "C") {
             infoTitle =  "¿Seguro desea publicar la oferta de compra?";
             infoText =  `Se hará una publicación de compra por ${amount} ${currencyIso}`;
-            publication_selling = false; 
+            publication_selling = false;
         } else {
             infoTitle =  "¿Seguro desea publicar la oferta de venta?";
             infoText =  `Se hará una publicación de venta por ${amount} ${currencyIso}`;
         }
 
         let publication = {
-            publication_main_currency: currency, 
+            publication_main_currency: currency,
             publication_selling : publication_selling,
-            publication_amount : amount, 
+            publication_amount : amount,
             publication_user_id : 1,
         }
 
@@ -62,7 +62,7 @@ class Offer extends Component {
     }
 
     doPublishPost(publication) {
-        let apiUrlPost = apiUrl + `Publications?currency_id=${publication.publication_main_currency}&selling=${publication.publication_selling}&price=${0}&amount=${publication.publication_amount}&user_id=${publication.publication_user_id}`;
+        let apiUrlPost = Api.default.baseUrl + `Publications?currency_id=${publication.publication_main_currency}&selling=${publication.publication_selling}&price=${0}&amount=${publication.publication_amount}&user_id=${publication.publication_user_id}`;
 
         Axios.post(apiUrlPost, publication)
         .then(response => {
@@ -72,12 +72,14 @@ class Offer extends Component {
     }
 
     componentDidMount() {
-        Axios.get(apiUrl + 'Currencies').then((response) => {
-            console.log(response.data);
-                    this.setState({ currencies : response.data });
-                }).catch((error) => {
-                    console.log(error);
-                });
+        Axios.get(Api.default.baseUrl + "Currencies")
+            .then(response => {
+                console.log(response.data);
+                this.setState({ currencies: response.data });
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     render() {

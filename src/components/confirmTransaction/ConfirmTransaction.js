@@ -6,7 +6,7 @@ import './styles.css';
 import Axios from 'axios';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
-import { url as apiUrl } from '../../api/Methods';
+import * as Api from "../../api/Methods";
 
 class ConfirmTransaction extends Component {
     onClick(event) {
@@ -14,7 +14,7 @@ class ConfirmTransaction extends Component {
 
         let { id, offerer, amount, erate, from, to, state } = this.props.location.state;
         let transaction = { id, offerer, amount, erate, from, to, state : 1, buyer: sessionStorage.getItem("username"), calificationToBuyer : 0, calificationToOfferer: 0};
-        let url = apiUrl + '/' + id;
+        let url = Api.default.baseUrl + "/" + id;
 
         console.log("va la transaction");
         console.log(transaction);

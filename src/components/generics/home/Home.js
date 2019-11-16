@@ -5,7 +5,7 @@ import NavBar from '../navbar/NavBar';
 import './styles.css';
 import TransactionCard from '../../transactionCard/TransactionCard';
 import Axios from 'axios';
-import { url } from './../../../api/Methods';
+import * as Api from "./../../../api/Methods";
 
 class Home extends Component {
     constructor(props) {
@@ -17,11 +17,11 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        Axios.get(url)
-            .then((response) => {
-                this.setState({ pending_transactions: response.data })
+        Axios.get(Api.default.baseUrl)
+            .then(response => {
+                this.setState({ pending_transactions: response.data });
             })
-            .catch((error) => {
+            .catch(error => {
                 console.log(error);
             });
     }
