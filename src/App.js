@@ -8,6 +8,7 @@ import Home from "./components/generics/home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Offer from "./components/offer/Offer";
 import ConfirmTransaction from "./components/confirmTransaction/ConfirmTransaction";
+import CalificarTransacciones from "./components/calificarTransaccion/CalificarTransacciones";
 
 class App extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component {
                     <Route exact path="/buy" component={Home} />
                     <Route exact path="/search" component={Home} />
                     <Route exact path="/offer" component={Offer} />
+                    <Route exact path="/calificarTransaccion" component={CalificarTransacciones} />
                     {/* <Route exact path="/transaction/:transactionId/confirm" render={(props) => console.log(props)>}/> */}
                     <Route exact path="/transaction/:transactionId/confirm" render={props => <ConfirmTransaction {...props} />} />
                 </div>
