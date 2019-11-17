@@ -10,7 +10,6 @@ import CardTransaccionCalificar from '../cardTransaccionCalificar/CardTransaccio
 class CalificarTransacciones extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             user_transacciones_confirmadas: [],
         };
@@ -70,7 +69,8 @@ class CalificarTransacciones extends Component {
             </div>    
         );
     }
-    
+
+
 }
 
 CalificarTransacciones.propTypes = {
