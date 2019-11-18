@@ -7,6 +7,7 @@ import Signup from "./components/generics/signup/Signup";
 import Home from "./components/generics/home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Offer from "./components/offer/Offer";
+import CalificarPublicaciones from "./components/calificarPublicacion/CalificarPublicaciones";
 import ConfirmTransaction from "./components/confirmTransaction/ConfirmTransaction";
 
 class App extends Component {
@@ -31,20 +32,24 @@ class App extends Component {
                         <title>Plata Exchange</title>
                     </Helmet>
 
-                    <Route exact path="/" component={Login} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/signup" component={Signup} />
-                    <Route exact path="/home" component={Home} />
-                    <Route exact path="/home/new" component={Home} />
-                    <Route exact path="/buy" component={Home} />
-                    <Route exact path="/search" component={Home} />
-                    <Route exact path="/offer" component={Offer} />
-                    {/* <Route exact path="/transaction/:transactionId/confirm" render={(props) => console.log(props)>}/> */}
-                    <Route exact path="/transaction/:transactionId/confirm" render={props => <ConfirmTransaction {...props} />} />
-                </div>
-            </Router>
-        );
-    }
+          <Route exact path="/" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/home/new" component={Home} />
+          <Route exact path="/buy" component={Home} />
+          <Route exact path="/search" component={Home} />
+          <Route exact path="/offer" component={Offer}/>
+          <Route exact path= "/calificarPublicacion" component={CalificarPublicaciones}/>
+          {/* <Route exact path="/transaction/:transactionId/confirm" render={(props) => console.log(props)>}/> */}
+          <Route
+            exact
+            path="/transaction/:transactionId/confirm"
+            render={props => <ConfirmTransaction {...props} />}
+          />
+        </div>
+      </Router>
+    );
+  }
 }
 
 App.propTypes = {};

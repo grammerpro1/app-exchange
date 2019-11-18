@@ -40,7 +40,6 @@ class Home extends Component {
                 <div className="home-layout">
                     <div className="cards-layout">
                         {
-
                             non_user_transactions.map(transaction => {
                                 return <TransactionCard
                                     key={transaction.id}
