@@ -8,7 +8,7 @@ import Home from "./components/generics/home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Offer from "./components/offer/Offer";
 import CalificarPublicaciones from "./components/calificarPublicacion/CalificarPublicaciones";
-import ConfirmTransaction from "./components/confirmTransaction/ConfirmTransaction";
+import ConfirmTransaction from "./components/ConfirmTransaction/ConfirmTransaction";
 
 class App extends Component {
     constructor(props) {
@@ -33,10 +33,11 @@ class App extends Component {
                     </Helmet>
 
           <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/home/new" component={Home} />
-          <Route exact path="/buy" component={Home} />
+          <Route exact path="/buy" component={ConfirmTransaction} />
           <Route exact path="/search" component={Home} />
           <Route exact path="/offer" component={Offer}/>
           <Route exact path= "/calificarPublicacion" component={CalificarPublicaciones}/>

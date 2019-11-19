@@ -12,14 +12,14 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            pending_transactions: [],
+            pending_publications: [],
         };
     }
 
     componentDidMount() {
-        Axios.get(Api.default.baseUrl)
-            .then(response => {
-                this.setState({ pending_transactions: response.data });
+        Axios.get("http://topicos.azurewebsites.net/api/Publications")
+            .then((response) => {
+                this.setState({ pending_publications: response.data })
             })
             .catch(error => {
                 console.log(error);
@@ -31,8 +31,8 @@ class Home extends Component {
     }
 
     render() {
-        let other_transactions = this.state.pending_transactions;
-        let non_user_transactions = other_transactions.filter(other_transactions => other_transactions.offerer !== 2);
+        let other_publications = this.state.pending_publications;
+        let non_user_publications = other_publications.filter(other_publications => other_publications.publication_user_id != localStorage.getItem("userId"));
 
         return (
             <div>
@@ -40,16 +40,14 @@ class Home extends Component {
                 <div className="home-layout">
                     <div className="cards-layout">
                         {
-                            non_user_transactions.map(transaction => {
+                            non_user_publications.map(publication => {
                                 return <TransactionCard
-                                    key={transaction.id}
-                                    id={transaction.id}
-                                    offerer={transaction.offerer}
-                                    amount={transaction.amount}
-                                    erate={transaction.erate}
-                                    from={transaction.from}
-                                    to={transaction.to}
-                                    state={transaction.state}
+                                    key={publication.publication_id}
+                                    publication_id={publication.publication_id}
+                                    publication_main_currency={publication.publication_main_currency}
+                                    publication_selling={publication.publication_selling} //Se usa como vendido o no
+                                    publication_amount={publication.publication_amount}
+                                    publication_user_id={publication.publication_user_id}
                                 />;
                             })
                         }
