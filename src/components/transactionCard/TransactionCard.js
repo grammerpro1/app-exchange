@@ -84,7 +84,7 @@ class TransactionCard extends Component {
                             <CardTitle><h1>{publication_id}</h1></CardTitle>
                             <CardSubtitle><h3>{user_username}</h3></CardSubtitle>
                             <CardText>{`${user_firstname} ${user_lastname} vende ${publication_amount} a ${publication_main_currency}`}</CardText>
-                            {publication_selling === false ? (<Button block onClick={this.handleBuy.bind(this)}>Comprar</Button>) : 
+                            {publication_selling === false  ? (<Button block onClick={this.handleBuy.bind(this)}>Comprar</Button>) : 
                              (<Button outline block disabled>Comprado</Button>)}
                         </CardBody>
                     </Card>
