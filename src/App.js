@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import Login from "./components/generics/login/Login";
 import Signup from "./components/generics/signup/Signup";
@@ -27,30 +26,21 @@ class App extends Component {
         return (
             <Router>
                 <div>
-                    <Helmet>
-                        <meta charSet="utf-8" />
-                        <title>Plata Exchange</title>
-                    </Helmet>
-
-          <Route exact path="/" component={Login} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/home/new" component={Home} />
-          <Route exact path="/buy" component={ConfirmTransaction} />
-          <Route exact path="/search" component={Home} />
-          <Route exact path="/offer" component={Offer}/>
-          <Route exact path= "/calificarPublicacion" component={CalificarPublicaciones}/>
-          {/* <Route exact path="/transaction/:transactionId/confirm" render={(props) => console.log(props)>}/> */}
-          <Route
-            exact
-            path="/transaction/:transactionId/confirm"
-            render={props => <ConfirmTransaction {...props} />}
-          />
-        </div>
-      </Router>
-    );
-  }
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/signup" component={Signup} />
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/home/new" component={Home} />
+                    <Route exact path="/buy" component={ConfirmTransaction} />
+                    <Route exact path="/search" component={Home} />
+                    <Route exact path="/offer" component={Offer} />
+                    <Route exact path="/calificarPublicacion" component={CalificarPublicaciones} />
+                    {/* <Route exact path="/transaction/:transactionId/confirm" render={(props) => console.log(props)>}/> */}
+                    <Route exact path="/transaction/:transactionId/confirm" render={props => <ConfirmTransaction {...props} />} />
+                </div>
+            </Router>
+        );
+    }
 }
 
 App.propTypes = {};
