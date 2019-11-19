@@ -22,7 +22,7 @@ class Offer extends Component {
         let currencyIso = this.currencyInput.value.split("<cur>")[0];
         let currency = this.currencyInput.value.split("<cur>")[1];
         let publicationType = this.publicationTypeInput.value;
-        let publication_selling = true;
+        let publication_selling = false; //Esto se usa para saber si se vendió o no
 
         let infoText = "";
         let infoTitle = "";
@@ -30,7 +30,6 @@ class Offer extends Component {
         if(publicationType === "C") {
             infoTitle =  "¿Seguro desea publicar la oferta de compra?";
             infoText =  `Se hará una publicación de compra por ${amount} ${currencyIso}`;
-            publication_selling = false;
         } else {
             infoTitle =  "¿Seguro desea publicar la oferta de venta?";
             infoText =  `Se hará una publicación de venta por ${amount} ${currencyIso}`;
@@ -40,7 +39,7 @@ class Offer extends Component {
             publication_main_currency: currency,
             publication_selling : publication_selling,
             publication_amount : amount,
-            publication_user_id : 1,
+            publication_user_id : localStorage.getItem("userId"),
         }
 
         swal({

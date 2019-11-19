@@ -78,7 +78,7 @@ class TransactionCard extends Component {
 
         return (
             <div>
-                <Container className="card-container">
+                <Container className="confirmation-card-container">
                     <Card width>
                         <CardBody>
                             <CardTitle><h1>{publication_id}</h1></CardTitle>
