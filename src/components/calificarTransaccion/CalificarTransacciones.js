@@ -16,27 +16,30 @@ class CalificarTransacciones extends Component {
     }
 
     componentDidMount() {
-
-        let transaction_confirm = [
-            {
-              "id": 1000,
-              "userName": "Aparicio Baptista",
-              "amount": 10000,
-              "calificacion": 0
-            }];
-
-            this.setState({user_transacciones_confirmadas:transaction_confirm});
-        
             
-        /*   
-        Axios.get(url + "Publications")
-            .then((response) => {
-                this.setState({user_puclicaciones_cerrada: response.data })
+            //let urlGetTransactionsConfirmTest = `https://topicos.azurewebsites.net/api/Transactions/Accept?user_id=1&publication_id=3`;
+            let urlGetTransactionsConfirm = `https://topicos.azurewebsites.net/api/Transactions/Accept?user_id=${localStorage.getItem("userId")}&publication_id=${this.props.publicactionId}`;
+
+            
+            Axios.get(urlGetTransactionsConfirm)
+            .then((resp)=>{
+                this.setState({user_transacciones_confirmadas:urlGetTransactionsConfirm});
             })
-            .catch((error) => {
+            .catch((error)=>{
                 console.log(error);
+                console.log(error.data);
             });
-        */
+            
+            /*
+            Axios.get(urlGetTransactionsConfirmTest)
+            .then((resp)=>{
+                this.setState({user_transacciones_confirmadas:urlGetTransactionsConfirmTest});
+            })
+            .catch((error)=>{
+                console.log(error);
+                console.log(error.data);
+            });
+            */
     }
 
     componentDidUpdate() {
@@ -45,8 +48,6 @@ class CalificarTransacciones extends Component {
 
 
     render() {
-       // let all_publications_confirm = this.state.publications_confirm;
-        //let transaction_confirm = other_transactions.filter(other_transactions => other_transactions.offerer !== 2);
         return (
             <div>
                 <NavBar />
@@ -61,6 +62,7 @@ class CalificarTransacciones extends Component {
                                     username={transaccion.username}
                                     amount={transaccion.amount}
                                     calificacion={transaccion.calificacion}
+                                    publicactionId={transaccion.publicactionId}
                                 />;
                             })
                         }
@@ -69,8 +71,6 @@ class CalificarTransacciones extends Component {
             </div>    
         );
     }
-
-
 }
 
 CalificarTransacciones.propTypes = {

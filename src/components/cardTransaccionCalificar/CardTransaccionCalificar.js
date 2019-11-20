@@ -4,6 +4,7 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Container } 
 import './styles.css';
 import { withRouter, Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import Axios from 'axios';
 
 
 
@@ -13,7 +14,6 @@ class CardTransaccionCalificar extends Component {
     handleBuy(e) {
             let { id, userName, amount, calificacion} = this.props;
             let Transaccion = { id, userName, amount, calificacion };
-            console.log("entro al handleBuy");
     }
 
     wrapperFunction = (e)=>{
@@ -49,8 +49,27 @@ class CardTransaccionCalificar extends Component {
             text: "Transaccion del usuario: "+this.userName,
             buttons: ["Negativa", "Positiva"],
           })
+          .then((resp)=>{
+            if(resp===true){
+                let urlPostCalification = `https://topicos.azurewebsites.net/api/Transactions/RatingVenta?user_id=${localStorage.getItem("userId")}&publication_id=${this.props.publicationId}&rating=1`;
+                
+                Axios.post(urlPostCalification,{})
+                .then(resp=>{
+                    console.log(resp);
+                    console.log(resp.data);
+                }); 
+            }
+            else{
+                let urlPostCalification = `https://topicos.azurewebsites.net/api/Transactions/RatingVenta?user_id=${localStorage.getItem("userId")}&publication_id=${this.props.publicationId}&rating=-1`;
+                
+                Axios.post(urlPostCalification,{})
+                .then(resp=>{
+                    console.log(resp);
+                    console.log(resp.data);
+                });
+            }
+        });  
     }
-
 }
 
 CardTransaccionCalificar.propTypes = {
