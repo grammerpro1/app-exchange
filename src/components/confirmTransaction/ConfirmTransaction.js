@@ -73,7 +73,7 @@ class Home extends Component {
             </div>
         );
     }
-}
+} 
 
 Home.propTypes = {
     userId: PropTypes.number.isRequired,
