@@ -7,62 +7,45 @@ import Axios from 'axios';
 import { baseUrl as url } from '../../api/Methods';
 import CardPublicacionCalificar from '../cardPublicacionCalificar/CardPublicacionCalificar';
 
-class CalificarPublicaciones extends Component {
+class CalifcarPublicaciones extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            user_puclicaciones_cerrada: [],
+            transactions: [],
+            associated_transaction : [],
         };
     }
 
     componentDidMount() {
-
-        let transaction_confirm = [
-            {
-              "id": 1000,
-              "userName": "Aparicio Baptista",
-              "amount": 10000,
-              "calificacion": 0
-            }];
-
-            this.setState({user_puclicaciones_cerrada:transaction_confirm});
-        
-            
-        /*   
-        Axios.get(url + "Publications")
+        Axios.get(`http://topicos.azurewebsites.net//api/Transactions/publicationOfMyTransaction?user_id=${localStorage.getItem("userId")}`)
             .then((response) => {
-                this.setState({user_puclicaciones_cerrada: response.data })
+                this.setState({transactions: response.data})
             })
-            .catch((error) => {
+            .catch(error => {
                 console.log(error);
             });
-        */
     }
 
     componentDidUpdate() {
-        console.log('chorizo');
+        // console.log('chorizo');
     }
 
 
     render() {
-       // let all_publications_confirm = this.state.publications_confirm;
-        console.log(this.state);
-        //let transaction_confirm = other_transactions.filter(other_transactions => other_transactions.offerer !== 2);
+        const { transactions } = this.state;
+
         return (
             <div>
                 <NavBar />
-                <div className="calificarPublicaciones-layout">
+                <div className="calificarTransacciones-layout">
                     
                     <div className="cards-layout">
                         {
-                            this.state.user_puclicaciones_cerrada.map(publicacion => {
+                            transactions.map(transaction => {
                                 return <CardPublicacionCalificar
-                                    key={publicacion.id}
-                                    id={publicacion.id}
-                                    username={publicacion.username}
-                                    amount={publicacion.amount}
-                                    calificacion={publicacion.calificacion}
+                                key={transaction[0].publication_id}
+                                publication_user_id={transaction[0].publication_user_id}
+                                publication_id={transaction[0].publication_id}
                                 />;
                             })
                         }
@@ -71,12 +54,6 @@ class CalificarPublicaciones extends Component {
             </div>    
         );
     }
-    
 }
 
-CalificarPublicaciones.propTypes = {
-    userId: PropTypes.number.isRequired,
-    username: PropTypes.string.isRequired,
-};
-
-export default withRouter(CalificarPublicaciones);
+export default withRouter(CalifcarPublicaciones);

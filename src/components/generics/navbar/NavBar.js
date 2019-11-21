@@ -21,31 +21,37 @@ const NavBar = (props) => {
   return (
     <div>
       <Navbar style={{ backgroundColor: "wheat"}} expand="md">
-        <NavbarBrand href="/">Plata Exchange</NavbarBrand>
+        <NavbarBrand href="/home">Plata Exchange</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/home">Inicio</NavLink>
+              <NavLink href="/home">Ver publicaciones</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/calificarTransaccion">Calificar Transacciones</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/calificarPublicacion">Calificar Publicaciones</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/buy">Comprar</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/offer">Ofertar</NavLink>
+              <NavLink href="/offer">Publicar</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Opciones
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
+                {/* <DropdownItem>
                   Perfil
                 </DropdownItem>
                 <DropdownItem>
                   Configuración
                 </DropdownItem>
-                <DropdownItem divider />
+                <DropdownItem divider /> */}
                 <DropdownItem>
                   <NavLink href="/login">Desconectarse</NavLink>
                 </DropdownItem>

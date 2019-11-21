@@ -5,48 +5,66 @@ import NavBar from '../../components/generics/navbar/NavBar';
 import './styles.css';
 import TransactionCard from '../../components/ConfirmationCard/ConfirmationCard';
 import Axios from 'axios';
+import ConfirmationCard from '../../components/ConfirmationCard/ConfirmationCard';
 
 class Home extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            pending_publications: [],
+            publications: [],
+            my_publications: [],
+            transactions: [],
+            transactions_for_me: [],
         };
     }
 
     componentDidMount() {
         Axios.get("http://topicos.azurewebsites.net/api/Publications")
+        .then((response) => {
+            this.setState({publications: response.data})
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+        Axios.get(`http://topicos.azurewebsites.net/api/Transactions`)
             .then((response) => {
-                this.setState({ pending_publications: response.data })
+                this.setState({transactions: response.data})
             })
             .catch(error => {
                 console.log(error);
             });
+            
     }
 
     componentDidUpdate() {
-        console.log('chorizo');
+        // console.log('chorizo');
     }
 
     render() {
-        let other_publications = this.state.pending_publications;
-        let non_user_publications = other_publications.filter(other_publications => other_publications.publication_user_id != localStorage.getItem("userId"));
-
+        const { publications, transactions } = this.state;
+        const filteredPublications = publications.filter(publication => publication.publication_user_id == localStorage.getItem("userId") && publication.publication_selling == false);
+        const myPublicationsIds = filteredPublications.map(publication => publication.publication_id);
+        const transactionsByOthers = transactions.filter(transaction => myPublicationsIds.includes(transaction.transaction_pub_id));
+        
         return (
             <div>
                 <NavBar />
                 <div className="home-layout">
                     <div className="cards-layout">
                         {
-                            non_user_publications.map(publication => {
-                                return <TransactionCard
-                                    key={publication.publication_id}
-                                    publication_id={publication.publication_id}
-                                    publication_main_currency={publication.publication_main_currency}
-                                    publication_selling={publication.publication_selling} //Se usa como vendido o no
-                                    publication_amount={publication.publication_amount}
-                                    publication_user_id={publication.publication_user_id}
+                            transactionsByOthers.map(transaction => {
+                                console.log("transaction")
+                                console.log(transaction);
+                                return <ConfirmationCard
+                                transaction_user_id={transaction.transaction_user_id}
+                                transaction_pub_id={transaction.transaction_pub_id}
+                                transaction_amount={transaction.transaction_amount}
+                                transaction_accepted={transaction.transaction_accepted}
+                                transaction_rating_compra={transaction.transaction_rating_compra}
+                                transaction_rating_venta={transaction.transaction_rating_venta}
+                                transaction_ahorro={transaction.transaction_ahorro}
                                 />;
                             })
                         }

@@ -11,43 +11,28 @@ class CalificarTransacciones extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user_transacciones_confirmadas: [],
+            transactions: [],
         };
     }
 
     componentDidMount() {
-            
-            //let urlGetTransactionsConfirmTest = `https://topicos.azurewebsites.net/api/Transactions/Accept?user_id=1&publication_id=3`;
-            let urlGetTransactionsConfirm = `https://topicos.azurewebsites.net/api/Transactions/Accept?user_id=${localStorage.getItem("userId")}&publication_id=${this.props.publicactionId}`;
-
-            
-            Axios.get(urlGetTransactionsConfirm)
-            .then((resp)=>{
-                this.setState({user_transacciones_confirmadas:urlGetTransactionsConfirm});
+        Axios.get(`http://topicos.azurewebsites.net/api/Transactions/transAcceptUserPublication?user_id=${localStorage.getItem("userId")}`)
+            .then((response) => {
+                this.setState({transactions: response.data})
             })
-            .catch((error)=>{
+            .catch(error => {
                 console.log(error);
-                console.log(error.data);
             });
-            
-            /*
-            Axios.get(urlGetTransactionsConfirmTest)
-            .then((resp)=>{
-                this.setState({user_transacciones_confirmadas:urlGetTransactionsConfirmTest});
-            })
-            .catch((error)=>{
-                console.log(error);
-                console.log(error.data);
-            });
-            */
     }
 
     componentDidUpdate() {
-        console.log('chorizo');
+        // console.log('chorizo');
     }
 
 
     render() {
+        const { transactions } = this.state;
+
         return (
             <div>
                 <NavBar />
@@ -55,14 +40,17 @@ class CalificarTransacciones extends Component {
                     
                     <div className="cards-layout">
                         {
-                            this.state.user_transacciones_confirmadas.map(transaccion => {
+                            transactions.map(transaction => {
+                                console.log(transaction);
                                 return <CardTransaccionCalificar
-                                    key={transaccion.id}
-                                    id={transaccion.id}
-                                    username={transaccion.username}
-                                    amount={transaccion.amount}
-                                    calificacion={transaccion.calificacion}
-                                    publicactionId={transaccion.publicactionId}
+                                key={transaction[0].transaction_user_id}
+                                transaction_user_id={transaction[0].transaction_user_id}
+                                transaction_pub_id={transaction[0].transaction_pub_id}
+                                transaction_amount={transaction[0].transaction_amount}
+                                transaction_accepted={transaction[0].transaction_accepted}
+                                transaction_rating_compra={transaction[0].transaction_rating_compra}
+                                transaction_rating_venta={transaction[0].transaction_rating_venta}
+                                transaction_ahorro={transaction[0].transaction_ahorro}
                                 />;
                             })
                         }
