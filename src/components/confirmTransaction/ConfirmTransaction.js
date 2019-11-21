@@ -1,10 +1,9 @@
-import React, { Component, useState } from './node_modules/react';
-import { withRouter } from './node_modules/react-router-dom';
-import PropTypes from './node_modules/prop-types';
+import React, { Component, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import NavBar from '../generics/navbar/NavBar';
 import './styles.css';
 import TransactionCard from '../ConfirmationCard/ConfirmationCard';
-import Axios from './node_modules/axios';
+import Axios from 'axios';
 import ConfirmationCard from '../ConfirmationCard/ConfirmationCard';
 
 class Home extends Component {
@@ -75,9 +74,5 @@ class Home extends Component {
     }
 } 
 
-Home.propTypes = {
-    userId: PropTypes.number.isRequired,
-    username: PropTypes.string.isRequired,
-};
 
 export default withRouter(Home);
