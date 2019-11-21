@@ -1,11 +1,11 @@
-import React, { Component, useState } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import NavBar from '../../components/generics/navbar/NavBar';
+import React, { Component, useState } from './node_modules/react';
+import { withRouter } from './node_modules/react-router-dom';
+import PropTypes from './node_modules/prop-types';
+import NavBar from '../generics/navbar/NavBar';
 import './styles.css';
-import TransactionCard from '../../components/ConfirmationCard/ConfirmationCard';
-import Axios from 'axios';
-import ConfirmationCard from '../../components/ConfirmationCard/ConfirmationCard';
+import TransactionCard from '../ConfirmationCard/ConfirmationCard';
+import Axios from './node_modules/axios';
+import ConfirmationCard from '../ConfirmationCard/ConfirmationCard';
 
 class Home extends Component {
     constructor(props) {

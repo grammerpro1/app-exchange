@@ -7,7 +7,7 @@ import Home from "./components/generics/home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Offer from "./components/offer/Offer";
 import CalificarPublicaciones from "./components/calificarPublicacion/CalificarPublicaciones";
-import ConfirmTransaction from "./components/ConfirmTransaction/ConfirmTransaction";
+import ConfirmTransaction from "./components/confirmTransaction/ConfirmTransaction";
 import CalificarTransacciones from "./components/calificarTransaccion/CalificarTransacciones";
 
 class App extends Component {
