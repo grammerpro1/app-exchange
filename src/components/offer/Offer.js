@@ -21,7 +21,7 @@ class Offer extends Component {
         let amount = this.amountInput.value;
         let currencyIso = this.currencyInput.value.split("<cur>")[0];
         let currency = this.currencyInput.value.split("<cur>")[1];
-        let publicationType = this.publicationTypeInput.value;
+        let publicationType =1;
         let publication_selling = false; //Esto se usa para saber si se vendió o no
 
         let infoText = "";
@@ -101,13 +101,6 @@ class Offer extends Component {
                                             return <option key={currencies.currency_id} value={val}>{currencies.currency_iso}</option>;
                                         })
                                     }
-                                </Input>
-                            </Col>
-                            <Col>
-                                <Label>Tipo publicación</Label>
-                                <Input type="select" innerRef={publicationTypeInput => this.publicationTypeInput = publicationTypeInput}>
-                                    <option value="C">Compra</option>
-                                    <option value="V">Venta</option>
                                 </Input>
                             </Col>
                             <Col>

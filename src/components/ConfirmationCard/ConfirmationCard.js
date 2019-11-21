@@ -19,60 +19,68 @@ class TransactionCard extends Component {
     handleBuy(e) {
         e.preventDefault();
 
-        swal("¿Cuantos pesos uruguayos desea ofrecer por esta publicación?", {
-            content: "input",
+        let { user_username, user_firstname, user_lastname } = this.state;
+
+        swal("¿Desea aceptar esta oferta?", {
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
           }).then((value) => {
-            swal({
-                title: `¿Seguro desea ofrecer ${value} por esta publicación?`,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-              })
-              .then((willDelete) => {
-                if (willDelete) {
-                    let apiUrlPost = `https://topicos.azurewebsites.net/api/Transactions?user_id=${localStorage.getItem("userId")}&publication_id=${this.props.publication_id}&amount=${value}`;
+            if (value) {
+                let apiUrlPost = `http://topicos.azurewebsites.net/api/Transactions/Accept?user_id=${this.props.transaction_user_id}&publication_id=${this.props.transaction_pub_id}`;
+                Axios.get(apiUrlPost, {})
+                .then(response => {
+                    console.log(response);
+                    console.log(response.data);
+                });
 
-                    Axios.post(apiUrlPost, {})
-                    .then(response => {
-                        console.log(response);
-                        console.log(response.data);
-                    });
+                //Mail user logueado
+                let apiUrlPost2 = `http://topicos.azurewebsites.net/api/Generic/Notify?user_id=${localStorage.getItem("userId")}&subject=Transaccon confirmada&message=Se ha confirmado la compra de la transaccion de ${user_firstname} ${user_lastname}`;
+                Axios.get(apiUrlPost, {})
+                .then(response => {
+                    console.log(response);
+                    console.log(response.data);
+                });
 
-                  swal("La oferta se ha enviado con éxito al propietario", {
-                    icon: "success",
-                  });
-                } else {
-                  swal("La operación se ha cancelado");
-                }
+                //Mail al otro guampudo
+                let apiUrlPost3 = `http://topicos.azurewebsites.net/api/Generic/Notify?user_id=${this.props.transaction_user_id}&subject=Se ha aceptado su oferta&message=Se ha aceptado su oferta por la publicacion ${this.props.transaction_pub_id}`;
+                Axios.get(apiUrlPost3, {})
+                .then(response => {
+                    console.log(response);
+                    console.log(response.data);
+                });
+
+
+              swal("Operacion confirmada", {
+                icon: "success",
               });
+            } else {
+              swal("La operación se ha cancelado");
+            }
         });
     }
 
     componentDidMount() {
-        this.getPublicationUser();
+        this.getTrUser();
     }
     
-    getPublicationUser() {
-        Axios.get(`http://topicos.azurewebsites.net/api/Users?user_id=${this.props.publication_user_id}`)
+    getTrUser() {
+        Axios.get(`http://topicos.azurewebsites.net/api/Users?user_id=${this.props.transaction_user_id}`)
         .then((response) => {
-            let { user_username, user_firstname, user_lastname } = this.response.data;
+            let { user_username, user_firstname, user_lastname } = response.data;
             this.setState({ user_username, user_firstname, user_lastname })
         })
         .catch(error => {
             console.log(error);
         });
-
-        console.log("el state");
-        console.log(this.state);
     }
 
     render() {
         
-        const { publication_id,
-            publication_main_currency,
-            publication_selling,
-            publication_amount,
-            publication_user_id } = this.props;
+        const { transaction_user_id,
+            transaction_pub_id,
+            transaction_amount,
+            transaction_accepted} = this.props;
 
         let { user_username, user_firstname, user_lastname } = this.state;
 
@@ -81,10 +89,10 @@ class TransactionCard extends Component {
                 <Container className="confirmation-card-container">
                     <Card width>
                         <CardBody>
-                            <CardTitle><h1>{publication_id}</h1></CardTitle>
+                            <CardTitle><h1>{transaction_user_id}</h1></CardTitle>
                             <CardSubtitle><h3>{user_username}</h3></CardSubtitle>
-                            <CardText>{`${user_firstname} ${user_lastname} vende ${publication_amount} a ${publication_main_currency}`}</CardText>
-                            {publication_selling === true ? (<Button block onClick={this.handleBuy.bind(this)}>Comprar</Button>) : 
+                            <CardText>{`${user_firstname} ${user_lastname} ofreció ${transaction_amount} UYU por la publicación ${transaction_pub_id}`}</CardText>
+                            {transaction_accepted === false || transaction_accepted === null ? (<Button block onClick={this.handleBuy.bind(this)}>Aceptar</Button>) : 
                              (<Button outline block disabled>Comprado</Button>)}
                         </CardBody>
                     </Card>
