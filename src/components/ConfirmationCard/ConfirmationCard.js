@@ -55,7 +55,7 @@ class TransactionCard extends Component {
     getPublicationUser() {
         Axios.get(`http://topicos.azurewebsites.net/api/Users?user_id=${this.props.publication_user_id}`)
         .then((response) => {
-            let { user_username, user_firstname, user_lastname } = response.data;
+            let { user_username, user_firstname, user_lastname } = this.response.data;
             this.setState({ user_username, user_firstname, user_lastname })
         })
         .catch(error => {
@@ -78,13 +78,13 @@ class TransactionCard extends Component {
 
         return (
             <div>
-                <Container className="card-container">
+                <Container className="confirmation-card-container">
                     <Card width>
                         <CardBody>
                             <CardTitle><h1>{publication_id}</h1></CardTitle>
                             <CardSubtitle><h3>{user_username}</h3></CardSubtitle>
                             <CardText>{`${user_firstname} ${user_lastname} vende ${publication_amount} a ${publication_main_currency}`}</CardText>
-                            {publication_selling === false  ? (<Button block onClick={this.handleBuy.bind(this)}>Comprar</Button>) : 
+                            {publication_selling === true ? (<Button block onClick={this.handleBuy.bind(this)}>Comprar</Button>) : 
                              (<Button outline block disabled>Comprado</Button>)}
                         </CardBody>
                     </Card>

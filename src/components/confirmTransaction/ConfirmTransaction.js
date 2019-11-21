@@ -1,60 +1,65 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import NavBar from '../generics/navbar/NavBar';
-import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
-import './styles.css';
-import Axios from 'axios';
-import swal from 'sweetalert';
+import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import * as Api from "../../api/Methods";
+import PropTypes from 'prop-types';
+import NavBar from '../../components/generics/navbar/NavBar';
+import './styles.css';
+import TransactionCard from '../../components/ConfirmationCard/ConfirmationCard';
+import Axios from 'axios';
 
-class ConfirmTransaction extends Component {
-    onClick(event) {
-        event.preventDefault();
+class Home extends Component {
+    constructor(props) {
+        super(props);
 
-        let { id, offerer, amount, erate, from, to, state } = this.props.location.state;
-        let transaction = { id, offerer, amount, erate, from, to, state : 1, buyer: sessionStorage.getItem("username"), calificationToBuyer : 0, calificationToOfferer: 0};
-        let url = Api.default.baseUrl + "/" + id;
+        this.state = {
+            pending_publications: [],
+        };
+    }
 
-        console.log("va la transaction");
-        console.log(transaction);
+    componentDidMount() {
+        Axios.get("http://topicos.azurewebsites.net/api/Publications")
+            .then((response) => {
+                this.setState({ pending_publications: response.data })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
-        Axios.put(url, transaction)
-        .then(response => {
-            console.log(response);
-            console.log(response.data);
-        });
-
-        swal("Exito", "La transacción ha sido completada", "success");
-
-        this.props.history.push('/home/new');
+    componentDidUpdate() {
+        console.log('chorizo');
     }
 
     render() {
+        let other_publications = this.state.pending_publications;
+        let non_user_publications = other_publications.filter(other_publications => other_publications.publication_user_id != localStorage.getItem("userId"));
+
         return (
             <div>
-                <NavBar/>
-                <div className="confirm-transaction-layout">
-                    <Container>
-                        <Row>
-                            <Col>
-                            <Jumbotron>
-                                <h1>Transacción {this.props.location.state.id}</h1>
-                                <hr/>
-                                <p>¿Está seguro que desea confirmar la transacción?</p>
-                                <Button color="primary" onClick={this.onClick.bind(this)}>Confirmar</Button>
-                            </Jumbotron>
-                            </Col>
-                        </Row>
-                    </Container>
+                <NavBar />
+                <div className="home-layout">
+                    <div className="cards-layout">
+                        {
+                            non_user_publications.map(publication => {
+                                return <TransactionCard
+                                    key={publication.publication_id}
+                                    publication_id={publication.publication_id}
+                                    publication_main_currency={publication.publication_main_currency}
+                                    publication_selling={publication.publication_selling} //Se usa como vendido o no
+                                    publication_amount={publication.publication_amount}
+                                    publication_user_id={publication.publication_user_id}
+                                />;
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
-ConfirmTransaction.propTypes = {
-
+Home.propTypes = {
+    userId: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
 };
 
-export default withRouter(ConfirmTransaction);
+export default withRouter(Home);

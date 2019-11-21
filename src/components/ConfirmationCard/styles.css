@@ -1,0 +1,7 @@
+.confirmation-card-container {
+    padding-bottom: 10px;
+}
+
+.confirmation-card-disabledCursor {
+  cursor: default;
+}

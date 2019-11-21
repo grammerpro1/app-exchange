@@ -11,6 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+import Home from '../home/Home';
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +47,7 @@ const NavBar = (props) => {
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  Desconectarse
+                  <NavLink href="/login">Desconectarse</NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -56,5 +57,8 @@ const NavBar = (props) => {
     </div>
   );
 }
+
+
+
 
 export default NavBar;
