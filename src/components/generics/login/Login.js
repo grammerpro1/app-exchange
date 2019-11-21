@@ -13,6 +13,11 @@ class Login extends Component {
         this.onLoginClick = this.onLoginClick.bind(this);
     }
 
+    componentDidMount() {
+        localStorage.clear();
+        sessionStorage.clear();
+    }
+
     onInputKeyPress(event) {
         if (event.key === "Enter") {
             this.onLoginClick(event);
